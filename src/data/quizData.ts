@@ -10,6 +10,34 @@ import { Tworub } from '../ui/icons/tworub'
 
 export const quizData = [
   {
+    id: '0',
+    question: 'сколько стоит взять IQOS 3 DUOS в аренду на неделю?',
+    rightAnswer: {
+      title:
+        'У Вас есть возможность оценить преимущества IQOS 3 DUOS, воспользовавшись сервисом аренды устройства на 7 дней всего за 10 ₽',
+    },
+    answers: [
+      {
+        id: 'a',
+        icon: Onerub,
+        text: '10 ₽',
+        isTrue: true,
+      },
+      {
+        id: 'b',
+        icon: Tworub,
+        text: '100 ₽',
+        wrongText: 'Аренда устройства IQOS 3 DUOS на 7 дней стоит 10 рублей',
+      },
+      {
+        id: 'c',
+        icon: Threerub,
+        text: '150 ₽',
+        wrongText: 'Аренда устройства IQOS 3 DUOS на 7 дней стоит 10 рублей',
+      },
+    ],
+  },
+  {
     id: '1',
     question: 'Что дороже?',
     caption: {

@@ -123,3 +123,17 @@
     color: #fffdfb;
     margin-top: 16px;
 }
+
+.firstSlideBackground {
+    width: 100%;
+    height: 273px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 0 0 36px 36px;
+}
+
+.noPadding {
+  & > div:nth-child(2) {
+    padding: 0;
+  }
+}

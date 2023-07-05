@@ -1,11 +1,14 @@
 import { useRef, useState } from 'react'
 import classNames from 'classnames'
 
+import backgroundCaption from '../../assets/spend.png'
 import { useQuizContext } from '../../containers/QuizProvider'
 import { quizData } from '../../data/quizData'
+import { Calculator } from '../calculator/calculator'
 import { Modal } from '../modal/Modal'
 import RateUsModal from '../rate-us-modal/RateUsModal'
 import styles from './quiz.module.scss'
+import AdultCaution from './ui/adult-caution'
 import EightCaption from './ui/eight-caption '
 import EightSlide from './ui/eight-slide'
 import FifthCaption from './ui/fifth-caption'
@@ -76,7 +79,8 @@ export const Quiz = () => {
     caption.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
   }
 
-  const isFinal = currentQuestion.id === quizData.length.toString()
+  const isFinal = currentQuestion.id === (quizData.length - 1).toString()
+  const isFirstSlide = currentQuestion.id === '0'
 
   const [animate, setAnimate] = useState(false)
 
@@ -107,7 +111,7 @@ export const Quiz = () => {
     isFinal && !isBeenRated ? handleOpenModal() : handleNext()
 
   const handlePreviousQuestion = () => {
-    if (currentQuestion.id === '1') return
+    if (currentQuestion.id === '0') return
     handlePrevious()
     handleClick()
     scrollToTop()
@@ -123,19 +127,25 @@ export const Quiz = () => {
         )}
       >
         <div>
-          <div className={styles.sliderCaption} ref={caption}>
+          <div
+            className={classNames(
+              styles.sliderCaption,
+              isFirstSlide && styles.noPadding,
+            )}
+            ref={caption}
+          >
             <div>
-              {Array.from({ length: quizData.length }, (_, i) =>
-                String(i + 1),
-              ).map((item, idx) => (
-                <div
-                  key={idx}
-                  className={classNames(
-                    styles.circlePoint,
-                    currentQuestion.id === item && styles.circlePoint__active,
-                  )}
-                ></div>
-              ))}
+              {Array.from({ length: quizData.length }, (_, i) => String(i)).map(
+                (item, idx) => (
+                  <div
+                    key={idx}
+                    className={classNames(
+                      styles.circlePoint,
+                      currentQuestion.id === item && styles.circlePoint__active,
+                    )}
+                  ></div>
+                ),
+              )}
             </div>
             <div>
               {
@@ -143,10 +153,26 @@ export const Quiz = () => {
                   currentQuestion.id as keyof typeof captionInnersToSlideId
                 ]
               }
+              {isFirstSlide && (
+                <>
+                  <div
+                    className={styles.firstSlideBackground}
+                    style={{ backgroundImage: `url(${backgroundCaption})` }}
+                  ></div>
+                </>
+              )}
             </div>
           </div>
           <div className={styles.slideBody}>
             {bodySlideToId[currentQuestion.id as keyof typeof bodySlideToId]}
+            {isFirstSlide && (
+              <>
+                <div>
+                  <Calculator />
+                  <AdultCaution />
+                </div>
+              </>
+            )}
           </div>
           {!isFinal ? (
             <div className={styles.buttonsWrapper}>

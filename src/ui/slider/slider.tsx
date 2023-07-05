@@ -1,0 +1,44 @@
+import { useState } from 'react'
+import ReactSlider from 'react-slider'
+import cn from 'classnames'
+
+import st from './slider.module.scss'
+
+type TProps = {
+  labels: string[]
+  title: string
+  symbol: string | string[]
+  min: number
+  max: number
+  step: number
+}
+
+export const Slider = ({ labels, title, symbol, max, min, step }: TProps) => {
+  const [value, setValue] = useState(min)
+
+  return (
+    <div className={st.wrapper}>
+      <span className={st.title}>{title}</span>
+      <div className={st.sliderContainer}>
+        <span>
+          {value} {symbol[value / step - 1] ?? symbol}
+        </span>
+      </div>
+      <ReactSlider
+        value={value}
+        min={min}
+        max={max}
+        step={step}
+        onChange={(value) => setValue(value)}
+        className={st.slider}
+        thumbClassName={st.thumb}
+        trackClassName={st.track}
+      />
+      <div className={cn(st.sliderLabels, { [st.small]: labels.length > 2 })}>
+        {labels.map((label) => (
+          <span>{label}</span>
+        ))}
+      </div>
+    </div>
+  )
+}

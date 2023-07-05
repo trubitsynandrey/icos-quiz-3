@@ -11,13 +11,6 @@ type Props = {
   isModal: boolean
 }
 
-declare global {
-  interface Window {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ym: any
-  }
-}
-
 const RateUsModal = ({ handleCloseModal, isModal }: Props) => {
   const [firstFilledIndex, setFirstFilledIndex] = useState<number | null>(null)
   const [secondFilledIndex, setSecondFilledIndex] = useState<number | null>(
@@ -61,9 +54,6 @@ const RateUsModal = ({ handleCloseModal, isModal }: Props) => {
                   <button
                     onClick={() => {
                       setFirstFilledIndex(idx)
-                      window.ym(94197337, 'reachGoal', 'clickStarUsefull', {
-                        rate: idx + 1,
-                      })
                     }}
                     key={idx}
                     className={classNames(shouldFill && styles.filled)}
@@ -85,12 +75,6 @@ const RateUsModal = ({ handleCloseModal, isModal }: Props) => {
                   <button
                     onClick={() => {
                       setSecondFilledIndex(idx)
-                      window.ym(
-                        94197337,
-                        'reachGoal',
-                        'clickStarPricePerception',
-                        { rate: idx + 1 },
-                      )
                     }}
                     key={idx}
                     className={classNames(shouldFill && styles.filled)}

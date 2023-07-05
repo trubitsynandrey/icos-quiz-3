@@ -147,18 +147,6 @@ export const Quiz = () => {
           </div>
           <div className={styles.slideBody}>
             {bodySlideToId[currentQuestion.id as keyof typeof bodySlideToId]}
-            {/* {currentQuestion.answers.map((item, idx) => (
-              <AnswerPickCard
-                key={idx}
-                icon={item.icon ? createElement(item.icon) : undefined}
-                answerVariant={item.id}
-                text={item.text}
-                isWrong={!item.isTrue}
-                subWrongText={item.subWrongText}
-                wrongText={item.wrongText}
-                scrollToTop={item.isTrue ? scrollToTop : undefined}
-              />
-            ))} */}
           </div>
           {!isFinal ? (
             <div className={styles.buttonsWrapper}>

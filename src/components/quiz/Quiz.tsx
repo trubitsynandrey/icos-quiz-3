@@ -175,16 +175,34 @@ export const Quiz = () => {
               </>
             )}
           </div>
-          {!isFinal ? (
-            <div className={styles.buttonsWrapper}>
-              <button onClick={handlePreviousQuestion}>Назад</button>
-              <button onClick={handleNext}>Далее</button>
-            </div>
-          ) : (
-            <button className={styles.button} onClick={buttonOnClick}>
-              {buttonText}
-            </button>
-          )}
+          <>
+            {isFirstSlide && (
+              <button className={styles.button} onClick={buttonOnClick}>
+                Результат
+              </button>
+            )}
+            {!isFinal ? (
+              <div
+                className={classNames(
+                  styles.buttonsWrapper,
+                  isFirstSlide && styles.displayNone,
+                )}
+              >
+                <button onClick={handlePreviousQuestion}>Назад</button>
+                <button onClick={handleNext}>Далее</button>
+              </div>
+            ) : (
+              <button
+                className={classNames(
+                  styles.button,
+                  isFirstSlide && styles.displayNone,
+                )}
+                onClick={buttonOnClick}
+              >
+                {buttonText}
+              </button>
+            )}
+          </>
         </div>
       </div>
       <Modal handleCloseModal={handleCloseModal} isModal={isStartModal} />

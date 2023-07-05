@@ -2,6 +2,7 @@ import { useState } from 'react'
 import ReactSlider from 'react-slider'
 import cn from 'classnames'
 
+import { useQuizContext } from '../../containers/QuizProvider'
 import st from './slider.module.scss'
 
 type TProps = {
@@ -11,9 +12,19 @@ type TProps = {
   min: number
   max: number
   step: number
+  name: string
 }
 
-export const Slider = ({ labels, title, symbol, max, min, step }: TProps) => {
+export const Slider = ({
+  labels,
+  title,
+  symbol,
+  max,
+  min,
+  step,
+  name,
+}: TProps) => {
+  const { setCalculationByName } = useQuizContext()
   const [value, setValue] = useState(min)
 
   return (
@@ -29,7 +40,10 @@ export const Slider = ({ labels, title, symbol, max, min, step }: TProps) => {
         min={min}
         max={max}
         step={step}
-        onChange={(value) => setValue(value)}
+        onChange={(value) => {
+          setValue(value)
+          setCalculationByName(name, value)
+        }}
         className={st.slider}
         thumbClassName={st.thumb}
         trackClassName={st.track}

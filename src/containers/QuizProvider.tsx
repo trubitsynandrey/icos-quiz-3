@@ -46,6 +46,8 @@ interface InitialValues {
   setIsBeenRated: React.Dispatch<React.SetStateAction<boolean>>
   isStartModal: boolean
   setIsStartModal: React.Dispatch<React.SetStateAction<boolean>>
+  calculation: { [x: string]: number }
+  setCalculationByName: (name: string, value: number) => void
   handlePrevious: () => void
 }
 
@@ -62,11 +64,20 @@ const initial: InitialValues = {
   isStartModal: true,
   setIsStartModal: () => undefined,
   handlePrevious: () => undefined,
+  calculation: {},
+  setCalculationByName: () => undefined,
 }
 
 const QuizContext = createContext<InitialValues>(initial)
 
 export const QuizProvider: React.FC<PropsWithChildren> = ({ children }) => {
+  const initialCalc = {
+    cigarette: 119,
+    cigarettePacksInDay: 0.5,
+    lightersMonthly: 1,
+    lighter: 38,
+    default: 119 * 0.5 * 30 + 1 * 25,
+  }
   const index = useRef(0)
 
   const [currentQuestion, setCurrentQuestion] = useState<Question>(quizData[0])
@@ -76,6 +87,9 @@ export const QuizProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [isStartModal, setIsStartModal] = useState(true)
 
   const [startTime, setStartTime] = useState<Date | null>(null)
+  const [calculation, setCalculation] = useState<{ [x: string]: number }>({
+    ...initialCalc,
+  })
 
   const calculateTimePassedAndReset = () => {
     // const endTime = new Date()
@@ -97,6 +111,11 @@ export const QuizProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const handlePrevious = () => {
     if (index.current === 0) return
+
+    if (index.current === 1) {
+      setCalculation({ ...initialCalc })
+    }
+
     index.current -= 1
     setCurrentQuestion(_.cloneDeep(quizData[index.current]))
     setIsRightTheme(false)
@@ -112,6 +131,22 @@ export const QuizProvider: React.FC<PropsWithChildren> = ({ children }) => {
     setIsRightTheme(false)
     setIsWrongTheme(false)
     setIsStartModal(true)
+  }
+
+  const setCalculationByName = (name: string, value: number) => {
+    setCalculation((prev) => {
+      const newObject = {
+        ...prev,
+        [name]: value,
+      }
+
+      return {
+        ...newObject,
+        total:
+          newObject.cigarette * newObject.cigarettePacksInDay * 30 +
+          newObject.lightersMonthly * newObject.lighter,
+      }
+    })
   }
 
   useEffect(() => {
@@ -131,6 +166,8 @@ export const QuizProvider: React.FC<PropsWithChildren> = ({ children }) => {
     isStartModal,
     setIsStartModal,
     handlePrevious,
+    calculation,
+    setCalculationByName,
   }
 
   return <QuizContext.Provider value={values}>{children}</QuizContext.Provider>

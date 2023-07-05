@@ -11,6 +11,7 @@ export const Calculator = () => {
         min={119}
         max={230}
         step={1}
+        name={'cigarette'}
       />
       <Slider
         title={'Количество пачек в день'}
@@ -19,6 +20,7 @@ export const Calculator = () => {
         min={0.5}
         max={2}
         step={0.5}
+        name={'cigarettePacksInDay'}
       />
       <Slider
         title={'Сколько примерно зажигалок Вы покупаете  в месяц'}
@@ -27,6 +29,7 @@ export const Calculator = () => {
         min={1}
         max={4}
         step={1}
+        name={'lightersMonthly'}
       />
       <Slider
         title={'Введите ценовую категорию зажигалок, которые Вы используете'}
@@ -35,6 +38,7 @@ export const Calculator = () => {
         min={25}
         max={100}
         step={1}
+        name={'lighter'}
       />
     </div>
   )

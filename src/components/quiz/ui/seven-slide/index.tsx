@@ -8,7 +8,7 @@ const SevenSlide = () => {
       <div className={styles.imgWrapper}>
         <img src={img} height={469} />
       </div>
-      <p
+      <div
         className={stylesCommon.importantText}
         style={{ marginBottom: '16px' }}
       >
@@ -17,7 +17,7 @@ const SevenSlide = () => {
           зависимость.
         </p>
         <p>Важно: IQOS не исключает риски для Вас и гружающих</p>
-      </p>
+      </div>
       <p className={stylesCommon.subText}>
         *«На 95% меньше вредных веществ» означает среднее снижение уровней
         вредных веществ (без учета никотина) в аэрозоле IQOS в сравнении с дымом

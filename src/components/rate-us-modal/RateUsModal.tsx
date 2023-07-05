@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import classNames from 'classnames'
 
 import { useQuizContext } from '../../containers/QuizProvider'
@@ -19,10 +19,20 @@ const RateUsModal = ({ handleCloseModal, isModal }: Props) => {
 
   const { setIsBeenRated } = useQuizContext()
 
+  const timeout = useRef<number>()
+
   useEffect(() => {
     if (secondFilledIndex === null || firstFilledIndex === null) return
     setIsBeenRated(true)
     handleCloseModal()
+    timeout.current = setTimeout(() => {
+      setFirstFilledIndex(null)
+      setSecondFilledIndex(null)
+    }, 500)
+
+    return () => {
+      clearInterval(timeout.current)
+    }
   }, [firstFilledIndex, secondFilledIndex])
 
   return (

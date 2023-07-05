@@ -36,7 +36,7 @@ export const Slider = ({ labels, title, symbol, max, min, step }: TProps) => {
       />
       <div className={cn(st.sliderLabels, { [st.small]: labels.length > 2 })}>
         {labels.map((label) => (
-          <span>{label}</span>
+          <span key={label}>{label}</span>
         ))}
       </div>
     </div>

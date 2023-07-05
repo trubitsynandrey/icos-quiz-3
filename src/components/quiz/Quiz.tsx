@@ -108,7 +108,8 @@ export const Quiz = () => {
   }
 
   const buttonOnClick = () =>
-    isFinal && !isBeenRated ? handleOpenModal() : handleNext()
+    // eslint-disable-next-line no-nested-ternary
+    isBeenRated ? handleNext() : isFinal ? handleOpenModal() : handleNext()
 
   const handlePreviousQuestion = () => {
     if (currentQuestion.id === '0') return

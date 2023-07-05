@@ -6,12 +6,8 @@
   display: flex;
   flex-direction: column;
 
-  &__wrong {
-    background-color: #34303d;
-  }
-
   & > div:first-child {
-    max-width: 624px;
+    width: 624px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -19,8 +15,9 @@
   }
 }
 
-.answersWrapper {
+.slideBody {
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 40px;
 }
@@ -31,7 +28,7 @@
   background: #fffdfb;
   text-align: center;
   margin-bottom: 24px;
-  & > div {
+  & > div:first-child {
     height: 60px;
     background-color: #00d1d2;
     border-radius: 36px 36px 0 0;
@@ -41,36 +38,12 @@
     gap: 16px;
     padding-left: 24px;
   }
-  & > p:first-of-type {
-    margin-top: 28px;
-    margin-bottom: 16px;
-  }
-  & > p.captionThinText {
-    color: #34303d;
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  & > p.notPickedFirst {
-    font-size: 28px;
-    color: #00d1d2;
-    &__wrong {
-      color: rgba(52, 48, 61, 1);
-    }
-  }
-  & > p.notPickedSecond {
-    font-size: 36px;
-    font-weight: 700;
-    color: rgba(52, 48, 61, 1);
-    text-transform: uppercase;
-    margin-bottom: 30px;
-  }
-  & > p.captionBoldText {
-    font-size: 36px;
-    font-weight: 700;
-    color: #00d1d2;
-    text-transform: uppercase;
-    margin-top: 20px;
-    margin-bottom: 4px;
+
+  & > div:nth-child(2) {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
 
@@ -88,30 +61,6 @@
 
 .caption__wrong {
   background-color: #34303d !important;
-}
-
-.warning {
-  display: flex;
-  border-radius: 999px;
-  margin-top: 36px;
-  height: 71px;
-  display: flex;
-  padding: 0 24px;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: #fff;
-  gap: 16px;
-  & > div:first-child {
-    width: 40px;
-    height: 40px;
-    line-height: 30px;
-  }
-  & > p {
-    word-wrap: normal;
-    font-size: 16px;
-    color: rgba(184, 183, 187, 1);
-    text-transform: uppercase;
-  }
 }
 
 .lookRightAnswer {
@@ -145,4 +94,32 @@
 
 .startModal {
   opacity: 0;
+}
+
+.buttonsWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  & > button {
+    color: #fffdfb;
+    font-size: 40px;
+    font-weight: 700;
+  }
+  & > button:nth-child(2) {
+    padding: 18px 40px;
+    border: 4px solid #FFFDFB;
+    border-radius: 999px;
+  }
+}
+
+.button {
+    border-radius: 1000px;
+    border: 4px solid #fffdfb;
+    background: #00d1d2;
+    font-size: 40px;
+    font-weight: 700;
+    width: 100%;
+    padding: 20px 24px;
+    color: #fffdfb;
+    margin-top: 16px;
 }

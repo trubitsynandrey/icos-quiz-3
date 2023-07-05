@@ -6,18 +6,9 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import { differenceInSeconds } from 'date-fns'
 import _ from 'lodash'
 
 import { quizData } from '../data/quizData'
-import { convertSecondsToTime } from '../utils/convert'
-
-declare global {
-  interface Window {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ym: any
-  }
-}
 
 interface Answer {
   id: string
@@ -55,6 +46,7 @@ interface InitialValues {
   setIsBeenRated: React.Dispatch<React.SetStateAction<boolean>>
   isStartModal: boolean
   setIsStartModal: React.Dispatch<React.SetStateAction<boolean>>
+  handlePrevious: () => void
 }
 
 const initial: InitialValues = {
@@ -69,6 +61,7 @@ const initial: InitialValues = {
   setIsBeenRated: () => undefined,
   isStartModal: true,
   setIsStartModal: () => undefined,
+  handlePrevious: () => undefined,
 }
 
 const QuizContext = createContext<InitialValues>(initial)
@@ -85,14 +78,13 @@ export const QuizProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [startTime, setStartTime] = useState<Date | null>(null)
 
   const calculateTimePassedAndReset = () => {
-    const endTime = new Date()
+    // const endTime = new Date()
 
     if (startTime) {
-      const difference = differenceInSeconds(endTime, startTime)
-      const formattedTime = convertSecondsToTime(difference.toString())
+      // const difference = differenceInSeconds(endTime, startTime)
+      // const formattedTime = convertSecondsToTime(difference.toString())
       setStartTime(null)
       setStartTime(new Date())
-      window.ym(94197337, 'reachGoal', 'GameTime', { game_time: formattedTime })
     }
   }
 
@@ -103,8 +95,15 @@ export const QuizProvider: React.FC<PropsWithChildren> = ({ children }) => {
     setIsWrongTheme(false)
   }
 
+  const handlePrevious = () => {
+    if (index.current === 0) return
+    index.current -= 1
+    setCurrentQuestion(_.cloneDeep(quizData[index.current]))
+    setIsRightTheme(false)
+    setIsWrongTheme(false)
+  }
+
   const startFromTheBeginning = async () => {
-    window.ym(94197337, 'reachGoal', 'startOver')
     index.current = 0
     setCurrentQuestion(_.cloneDeep(quizData[index.current]))
 
@@ -131,6 +130,7 @@ export const QuizProvider: React.FC<PropsWithChildren> = ({ children }) => {
     setIsBeenRated,
     isStartModal,
     setIsStartModal,
+    handlePrevious,
   }
 
   return <QuizContext.Provider value={values}>{children}</QuizContext.Provider>

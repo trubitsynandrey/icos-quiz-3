@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import classNames from 'classnames'
 
 import { useQuizContext } from '../../containers/QuizProvider'
 import { RateUsIcon } from '../../ui/icons/rate-us-icon'
 import { Star } from '../../ui/icons/star'
+import { sendGoal } from '../../utils/send-goal'
 import styles from './RateUsModal.module.scss'
 
 type Props = {
@@ -31,9 +32,31 @@ const RateUsModal = ({ handleCloseModal, isModal }: Props) => {
     }, 500)
 
     return () => {
-      clearInterval(timeout.current)
+      clearTimeout(timeout.current)
     }
   }, [firstFilledIndex, secondFilledIndex])
+
+  const handleFirst = useCallback((index: number) => {
+    setFirstFilledIndex(index)
+    sendGoal('usefullRate', {
+      'Информация в игре была для Вас полезна?': index + 1,
+    })
+    sendGoal('usefullRate', {
+      'Оценка информации': `Оценка ${index + 1}`,
+    })
+  }, [])
+
+  const handleSecond = useCallback((index: number) => {
+    setSecondFilledIndex(index)
+    sendGoal('perceptionRate', {
+      'Изменилось ли Ваше восприятие цены на устройство и стики?': index + 1,
+    })
+    sendGoal('perceptionRate', {
+      'Оценка восприятия': {
+        Оценки: { Оценка: `Оценка ${index + 1}` },
+      },
+    })
+  }, [])
 
   return (
     <>
@@ -63,7 +86,7 @@ const RateUsModal = ({ handleCloseModal, isModal }: Props) => {
                 return (
                   <button
                     onClick={() => {
-                      setFirstFilledIndex(idx)
+                      handleFirst(idx)
                     }}
                     key={idx}
                     className={classNames(shouldFill && styles.filled)}
@@ -84,7 +107,7 @@ const RateUsModal = ({ handleCloseModal, isModal }: Props) => {
                 return (
                   <button
                     onClick={() => {
-                      setSecondFilledIndex(idx)
+                      handleSecond(idx)
                     }}
                     key={idx}
                     className={classNames(shouldFill && styles.filled)}

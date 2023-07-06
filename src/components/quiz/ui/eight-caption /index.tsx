@@ -12,7 +12,7 @@ const EightCaption = () => {
         спасибо за участие в игре!
       </p>
       <p className={stylesCommon.slateText}>
-        Сервис «Аренда» за 10₽ на 7 дней,
+        Сервис «Аренда» за 10₽ от 7 дней,
       </p>
       <p
         className={stylesCommon.slateTextSmall}

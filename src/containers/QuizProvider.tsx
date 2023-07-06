@@ -33,8 +33,6 @@ interface InitialValues {
   handlePrevious: () => void
 }
 
-const calcFriendlyNames = {}
-
 const initial: InitialValues = {
   currentQuestion: quizData[0],
   handleNextQuestion: () => undefined,

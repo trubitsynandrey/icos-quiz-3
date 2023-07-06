@@ -10,7 +10,7 @@ const FifthSlide = () => {
       </div>
       <p
         className={stylesCommon.importantText}
-        style={{ marginBottom: '16px' }}
+        style={{ marginBottom: 'var(--space-m)' }}
       >
         Важно: IQOS не исключает риски для вас и окружающих.
       </p>

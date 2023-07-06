@@ -10,7 +10,10 @@ const EightSlide = () => {
         <img src={img} height={490} />
       </div>
       <AdultCaution />
-      <p className={stylesCommon.subText} style={{ marginTop: '16px' }}>
+      <p
+        className={stylesCommon.subText}
+        style={{ marginTop: 'var(--space-m)' }}
+      >
         4. По сравнению с предыдущими моделями IQOS.
       </p>
     </div>

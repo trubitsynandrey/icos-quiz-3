@@ -11,7 +11,10 @@ const FifthCaption = () => {
       >
         В чем преимущества IQOS?
       </p>
-      <p className={stylesCommon.slateText} style={{ marginBottom: '16px' }}>
+      <p
+        className={stylesCommon.slateText}
+        style={{ marginBottom: 'var(--space-m)' }}
+      >
         Сигареты подвергают окружающих воздействию дыма – IQOS не подвергает.
       </p>
       <p className={stylesCommon.slateTextSmall}>

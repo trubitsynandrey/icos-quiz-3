@@ -11,7 +11,7 @@ const SevenCaption = () => {
       >
         В чем преимущества IQOS?
       </p>
-      <p className={stylesCommon.slateText} style={{ marginBottom: '16px' }}>
+      <p className={stylesCommon.slateText}>
         При использовании IQOS выделяется на 95% меньше вредных веществ
         по сравнению с сигаретами.*
       </p>

@@ -2,7 +2,7 @@
   color: #34303d;
   text-align: center;
   font-size: 20px;
-  margin-top: 16px;
+  margin-top: var(--space-m);
   & > li {
     position: relative;
   }

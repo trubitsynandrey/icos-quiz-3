@@ -11,7 +11,10 @@ const FourthCaption = () => {
       >
         В чем преимущества IQOS?
       </p>
-      <p className={stylesCommon.slateText} style={{ marginBottom: '16px' }}>
+      <p
+        className={stylesCommon.slateText}
+        style={{ marginBottom: 'var(--space-m)' }}
+      >
         IQOS нагревает табак без горения. Без дыма. Без пепла
       </p>
       <p className={stylesCommon.slateTextSmall}>

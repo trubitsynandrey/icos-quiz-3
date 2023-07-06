@@ -5,10 +5,7 @@ import stylesCommon from '../common.module.scss'
 const SixCaption = () => {
   return (
     <>
-      <p
-        className={classNames(stylesCommon.boldGreen, stylesCommon.small)}
-        style={{ marginBottom: '16px' }}
-      >
+      <p className={classNames(stylesCommon.boldGreen, stylesCommon.small)}>
         В чем преимущества IQOS?
       </p>
       <p className={stylesCommon.slateTextSmall}>

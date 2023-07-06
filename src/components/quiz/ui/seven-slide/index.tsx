@@ -10,9 +10,9 @@ const SevenSlide = () => {
       </div>
       <div
         className={stylesCommon.importantText}
-        style={{ marginBottom: '16px' }}
+        style={{ marginBottom: 'var(--space-m)' }}
       >
-        <p style={{ marginBottom: '8px' }}>
+        <p style={{ marginBottom: '6px' }}>
           Важно: не исключает риски, в аэрозоле содержится никотин, вызывающий
           зависимость.
         </p>

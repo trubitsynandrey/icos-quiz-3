@@ -14,7 +14,10 @@ const EightCaption = () => {
       <p className={stylesCommon.slateText}>
         Сервис «Аренда» за 10₽ на 7 дней,
       </p>
-      <p className={stylesCommon.slateTextSmall} style={{ marginTop: '16px' }}>
+      <p
+        className={stylesCommon.slateTextSmall}
+        style={{ marginTop: 'var(--space-m)' }}
+      >
         чтобы оценить преимущества самого совершенного<sup>4</sup> IQOS 3 DUOS.
       </p>
     </>

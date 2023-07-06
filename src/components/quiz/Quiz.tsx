@@ -1,9 +1,10 @@
-import { useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import classNames from 'classnames'
 
 import backgroundCaption from '../../assets/spend.png'
 import { useQuizContext } from '../../containers/QuizProvider'
 import { quizData } from '../../data/quizData'
+import { sendGoal } from '../../utils/send-goal'
 import { Calculator } from '../calculator/calculator'
 import { Modal } from '../modal/Modal'
 import RateUsModal from '../rate-us-modal/RateUsModal'
@@ -58,6 +59,7 @@ export const Quiz = () => {
     setIsStartModal,
     handlePrevious,
     isBeenRated,
+    calculation,
   } = useQuizContext()
 
   const [isRateModal, setIsRateModal] = useState(false)
@@ -71,7 +73,10 @@ export const Quiz = () => {
     setButtonText('В начало')
   }
 
-  const handleCloseModal = () => setIsStartModal(false)
+  const handleCloseModal = () => {
+    sendGoal('quizStart')
+    setIsStartModal(false)
+  }
 
   const caption = useRef<HTMLDivElement | null>(null)
 
@@ -117,6 +122,30 @@ export const Quiz = () => {
     handleClick()
     scrollToTop()
   }
+  const handleGetResult = useCallback(() => {
+    buttonOnClick()
+
+    sendGoal('cigarettePrice', {
+      'Выберите ценовую категорию сигарет, которые Вы курите':
+        calculation.cigarette,
+    })
+    sendGoal('packCount', {
+      'Количество пачек в день': calculation.cigarettePacksInDay,
+    })
+    sendGoal('lighterCount', {
+      'Сколько примерно зажигалок Вы покупаете в месяц':
+        calculation.lightersMonthly,
+    })
+    sendGoal('lighterCount', {
+      'Сколько примерно зажигалок Вы покупаете в месяц': {
+        'Количество зажигалок в месяц': calculation.lightersMonthly,
+      },
+    })
+    sendGoal('lighterPrice', {
+      'Введите ценовую категорию зажигалок, которые Вы используете':
+        calculation.lighter,
+    })
+  }, [calculation])
 
   return (
     <>
@@ -177,7 +206,7 @@ export const Quiz = () => {
           </div>
           <>
             {isFirstSlide && (
-              <button className={styles.button} onClick={buttonOnClick}>
+              <button className={styles.button} onClick={handleGetResult}>
                 Результат
               </button>
             )}

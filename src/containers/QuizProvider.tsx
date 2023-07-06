@@ -8,6 +8,13 @@ import React, {
 } from 'react'
 
 import { quizData } from '../data/quizData'
+import { sendGoal } from '../utils/send-goal'
+
+declare global {
+  interface Window {
+    ym: (id: number, event: string, name: string, params?: unknown) => void
+  }
+}
 
 interface Question {
   id: string
@@ -40,17 +47,18 @@ const initial: InitialValues = {
 }
 
 const QuizContext = createContext<InitialValues>(initial)
+const initialCalc = {
+  cigarette: 119,
+  cigarettePacksInDay: 0.5,
+  lightersMonthly: 1,
+  lighter: 38,
+  default: 119 * 0.5 * 30 + 1 * 25,
+}
 
 export const QuizProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const initialCalc = {
-    cigarette: 119,
-    cigarettePacksInDay: 0.5,
-    lightersMonthly: 1,
-    lighter: 38,
-    default: 119 * 0.5 * 30 + 1 * 25,
-  }
   const index = useRef(0)
-
+  const intervalId = useRef<number | undefined>(undefined)
+  const seconds = useRef(0)
   const [currentQuestion, setCurrentQuestion] = useState<Question>(quizData[0])
   const [isBeenRated, setIsBeenRated] = useState(false)
   const [isStartModal, setIsStartModal] = useState(true)
@@ -73,7 +81,15 @@ export const QuizProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const handleNextQuestion = () => {
     index.current += 1
-    setCurrentQuestion({ ...quizData[index.current] })
+    const question = quizData[index.current]
+
+    if (index.current === quizData.length - 1) {
+      sendGoal('quizEnd')
+      sendGoal('gameTime', { 'Время игры': seconds.current })
+      clearInterval(intervalId.current)
+      seconds.current = 0
+    }
+    setCurrentQuestion({ ...question })
   }
 
   const handlePrevious = () => {
@@ -114,6 +130,15 @@ export const QuizProvider: React.FC<PropsWithChildren> = ({ children }) => {
   useEffect(() => {
     setStartTime(new Date())
   }, [])
+
+  useEffect(() => {
+    if (!isStartModal) {
+      const interval = setInterval(() => {
+        seconds.current += 1
+      }, 1000)
+      intervalId.current = interval
+    }
+  }, [isStartModal])
 
   const values: InitialValues = {
     currentQuestion,

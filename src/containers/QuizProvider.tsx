@@ -51,7 +51,7 @@ const initialCalc = {
   cigarette: 119,
   cigarettePacksInDay: 0.5,
   lightersMonthly: 1,
-  lighter: 38,
+  lighter: 25,
   default: 119 * 0.5 * 30 + 1 * 25,
 }
 
@@ -69,11 +69,7 @@ export const QuizProvider: React.FC<PropsWithChildren> = ({ children }) => {
   })
 
   const calculateTimePassedAndReset = () => {
-    // const endTime = new Date()
-
     if (startTime) {
-      // const difference = differenceInSeconds(endTime, startTime)
-      // const formattedTime = convertSecondsToTime(difference.toString())
       setStartTime(null)
       setStartTime(new Date())
     }

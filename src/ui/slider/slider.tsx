@@ -29,7 +29,7 @@ export const Slider = ({
 
   return (
     <div className={st.wrapper}>
-      <span className={st.title}>{title}</span>
+      <div className={st.title}>{title}</div>
       <div className={st.sliderContainer}>
         <span>
           {value} {symbol[value / step - 1] ?? symbol}

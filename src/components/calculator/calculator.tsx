@@ -1,17 +1,14 @@
+import { Input } from '../../ui/input/input'
 import { Slider } from '../../ui/slider/slider'
 import st from './calculator.module.scss'
 
 export const Calculator = () => {
   return (
     <div className={st.calculator}>
-      <Slider
-        title={'Выберите ценовую категорию сигарет, которые Вы курите'}
-        labels={['от 119 ₽', 'Более 230 ₽']}
-        symbol={'₽'}
-        min={119}
-        max={230}
-        step={1}
+      <Input
+        label={'Выберите ценовую категорию сигарет, которые Вы курите'}
         name={'cigarette'}
+        min={119}
       />
       <Slider
         title={'Количество пачек в день'}
@@ -31,14 +28,10 @@ export const Calculator = () => {
         step={1}
         name={'lightersMonthly'}
       />
-      <Slider
-        title={'Введите ценовую категорию зажигалок, которые Вы используете'}
-        labels={['от 25 ₽', 'Более 100 ₽']}
-        symbol={'₽'}
-        min={25}
-        max={100}
-        step={1}
+      <Input
+        label={'Введите ценовую категорию зажигалок, которые Вы используете'}
         name={'lighter'}
+        min={25}
       />
     </div>
   )

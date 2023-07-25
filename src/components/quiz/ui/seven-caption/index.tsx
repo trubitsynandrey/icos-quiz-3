@@ -11,7 +11,10 @@ const SevenCaption = () => {
       >
         В чем преимущества IQOS?
       </p>
-      <p className={stylesCommon.slateText}>
+      <p className={stylesCommon.slateText} style={{ marginBottom: '16px' }}>
+        IQOS нагревает табак без горения.
+      </p>
+      <p className={stylesCommon.slateTextSmall}>
         При использовании IQOS выделяется на 95% меньше вредных веществ
         по сравнению с сигаретами.*
       </p>

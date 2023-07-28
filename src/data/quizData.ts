@@ -23,7 +23,4 @@ export const quizData = [
   {
     id: '7',
   },
-  {
-    id: '8',
-  },
 ]

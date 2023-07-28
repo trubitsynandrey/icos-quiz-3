@@ -24,29 +24,25 @@ import SevenCaption from './ui/seven-caption'
 import SevenSlide from './ui/seven-slide'
 import SixCaption from './ui/six-caption'
 import SixSlide from './ui/six-slide'
-import ThirdCaption from './ui/third-caption'
-import ThirdSlide from './ui/third-slide'
 
 const captionInnersToSlideId = {
   '1': <FirstCaption />,
   '2': <SecondCaption />,
-  '3': <ThirdCaption />,
-  '4': <SevenCaption />,
-  '5': <FourthCaption />,
-  '6': <FifthCaption />,
-  '7': <SixCaption />,
-  '8': <EightCaption />,
+  '3': <SevenCaption />,
+  '4': <FourthCaption />,
+  '5': <FifthCaption />,
+  '6': <SixCaption />,
+  '7': <EightCaption />,
 }
 
 const bodySlideToId = {
   '1': <FirstSlide />,
   '2': <SecondSlide />,
-  '3': <ThirdSlide />,
-  '4': <SevenSlide />,
-  '5': <FourthSlide />,
-  '6': <FifthSlide />,
-  '7': <SixSlide />,
-  '8': <EightSlide />,
+  '3': <SevenSlide />,
+  '4': <FourthSlide />,
+  '5': <FifthSlide />,
+  '6': <SixSlide />,
+  '7': <EightSlide />,
 }
 
 export const Quiz = () => {

@@ -24,8 +24,6 @@ interface InitialValues {
   currentQuestion: Question
   handleNextQuestion: () => void
   startFromTheBeginning: () => void
-  isBeenRated: boolean
-  setIsBeenRated: React.Dispatch<React.SetStateAction<boolean>>
   isStartModal: boolean
   setIsStartModal: React.Dispatch<React.SetStateAction<boolean>>
   calculation: { [x: string]: number }
@@ -37,8 +35,6 @@ const initial: InitialValues = {
   currentQuestion: quizData[0],
   handleNextQuestion: () => undefined,
   startFromTheBeginning: () => undefined,
-  isBeenRated: false,
-  setIsBeenRated: () => undefined,
   isStartModal: true,
   setIsStartModal: () => undefined,
   handlePrevious: () => undefined,
@@ -60,7 +56,6 @@ export const QuizProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const intervalId = useRef<number | undefined>(undefined)
   const seconds = useRef(0)
   const [currentQuestion, setCurrentQuestion] = useState<Question>(quizData[0])
-  const [isBeenRated, setIsBeenRated] = useState(false)
   const [isStartModal, setIsStartModal] = useState(true)
 
   const [startTime, setStartTime] = useState<Date | null>(null)
@@ -140,8 +135,6 @@ export const QuizProvider: React.FC<PropsWithChildren> = ({ children }) => {
     currentQuestion,
     handleNextQuestion,
     startFromTheBeginning,
-    isBeenRated,
-    setIsBeenRated,
     isStartModal,
     setIsStartModal,
     handlePrevious,

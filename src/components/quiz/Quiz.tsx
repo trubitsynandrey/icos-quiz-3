@@ -7,42 +7,25 @@ import { quizData } from '../../data/quizData'
 import { sendGoal } from '../../utils/send-goal'
 import { Calculator } from '../calculator/calculator'
 import { Modal } from '../modal/Modal'
-import RateUsModal from '../rate-us-modal/RateUsModal'
 import styles from './quiz.module.scss'
 import AdultCaution from './ui/adult-caution'
 import EightCaption from './ui/eight-caption '
 import EightSlide from './ui/eight-slide'
-import FifthCaption from './ui/fifth-caption'
-import FifthSlide from './ui/fifth-slide'
 import FirstCaption from './ui/first-caption'
 import FirstSlide from './ui/first-slide'
-import FourthCaption from './ui/fourth-caption'
-import FourthSlide from './ui/fourth-slide'
 import SecondCaption from './ui/second-caption'
 import SecondSlide from './ui/second-slide'
-import SevenCaption from './ui/seven-caption'
-import SevenSlide from './ui/seven-slide'
-import SixCaption from './ui/six-caption'
-import SixSlide from './ui/six-slide'
 
 const captionInnersToSlideId = {
   '1': <FirstCaption />,
   '2': <SecondCaption />,
-  '3': <SevenCaption />,
-  '4': <FourthCaption />,
-  '5': <FifthCaption />,
-  '6': <SixCaption />,
-  '7': <EightCaption />,
+  '3': <EightCaption />,
 }
 
 const bodySlideToId = {
   '1': <FirstSlide />,
   '2': <SecondSlide />,
-  '3': <SevenSlide />,
-  '4': <FourthSlide />,
-  '5': <FifthSlide />,
-  '6': <SixSlide />,
-  '7': <EightSlide />,
+  '3': <EightSlide />,
 }
 
 export const Quiz = () => {
@@ -50,24 +33,11 @@ export const Quiz = () => {
     currentQuestion,
     handleNextQuestion,
     startFromTheBeginning,
-    setIsBeenRated,
     isStartModal,
     setIsStartModal,
     handlePrevious,
-    isBeenRated,
     calculation,
   } = useQuizContext()
-
-  const [isRateModal, setIsRateModal] = useState(false)
-  const [buttonText, setButtonText] = useState('Продолжить')
-
-  const handleCloseRateModal = () => {
-    setTimeout(() => {
-      setIsRateModal(false)
-    }, 500)
-
-    setButtonText('В начало')
-  }
 
   const handleCloseModal = () => {
     sendGoal('quizStart')
@@ -95,7 +65,6 @@ export const Quiz = () => {
   const handleNext = () => {
     if (isFinal) {
       startFromTheBeginning()
-      setIsBeenRated(false)
     } else {
       handleNextQuestion()
     }
@@ -104,14 +73,6 @@ export const Quiz = () => {
     scrollToTop()
   }
 
-  const handleOpenModal = () => {
-    setIsRateModal(true)
-  }
-
-  const buttonOnClick = () =>
-    // eslint-disable-next-line no-nested-ternary
-    isBeenRated ? handleNext() : isFinal ? handleOpenModal() : handleNext()
-
   const handlePreviousQuestion = () => {
     if (currentQuestion.id === '0') return
     handlePrevious()
@@ -119,7 +80,7 @@ export const Quiz = () => {
     scrollToTop()
   }
   const handleGetResult = useCallback(() => {
-    buttonOnClick()
+    handleNext()
 
     sendGoal('cigarettePrice', {
       'Выберите ценовую категорию сигарет, которые Вы курите':
@@ -222,19 +183,15 @@ export const Quiz = () => {
                   styles.button,
                   isFirstSlide && styles.displayNone,
                 )}
-                onClick={buttonOnClick}
+                onClick={handleNext}
               >
-                {buttonText}
+                В начало
               </button>
             )}
           </>
         </div>
       </div>
       <Modal handleCloseModal={handleCloseModal} isModal={isStartModal} />
-      <RateUsModal
-        handleCloseModal={handleCloseRateModal}
-        isModal={isRateModal}
-      />
     </>
   )
 }
